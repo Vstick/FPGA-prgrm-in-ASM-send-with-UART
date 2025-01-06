@@ -40,9 +40,10 @@ class PICInterpreter:
                     f = int(args[0])
                     binary_instr = opcode + f"{f:07b}"
                 elif instr in ['ADDWF', 'ANDWF', 'DECF', 'DECFSZ', 'INCF', 'INCFSZ', 'IORWF', 'COMF', 'MOVF', 'RLF', 'RRF', 'SUBWF', 'SWAPF', 'XORWF']:
-                    f = int(args[0])
-                    d = int(args[1]) if len(args) > 1 else 0
-                    binary_instr = opcode + f"{f:07b}" + f"{d:01b}"
+                    f = int(args[0])  # Registre fichier
+                    d = int(args[1]) if len(args) > 1 else 0  # Bit de destination (0 ou 1)
+                    # Construire le binaire dans le format `opcode|d|f`
+                    binary_instr = opcode + f"{d:01b}" + f"{f:07b}"
                 elif instr in ['BCF', 'BSF', 'BTFSC', 'BTFSS']:
                     f = int(args[0])
                     b = int(args[1])
